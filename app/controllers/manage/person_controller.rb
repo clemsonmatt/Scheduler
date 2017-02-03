@@ -1,5 +1,5 @@
 class Manage::PersonController < ApplicationController
     def index
-        @people = Person.all
+        @people = People.all
     end
 end

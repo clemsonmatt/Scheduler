@@ -1,11 +1,11 @@
 class Manage::Person::AvailabilityController < ApplicationController
     def show
-        @person       = Person.find(params[:id])
+        @person       = People.find(params[:id])
         @availability = Availability.new
     end
 
     def create
-        @person = Person.find(params[:id])
+        @person = People.find(params[:id])
 
         @availability         = Availability.new
         @availability.day     = availability_params['day']
@@ -33,7 +33,7 @@ class Manage::Person::AvailabilityController < ApplicationController
     end
 
     def destroy
-        person       = Person.find(params[:id])
+        person       = People.find(params[:id])
         availability = Availability.find(params[:availability_id])
 
         availability.destroy

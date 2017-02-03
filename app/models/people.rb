@@ -1,4 +1,4 @@
-class Person
+class People
     include Mongoid::Document
     include ActiveModel::SecurePassword
 

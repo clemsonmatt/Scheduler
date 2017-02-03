@@ -1,14 +1,14 @@
 class Manage::Person::ProfileController < ApplicationController
     def show
-        @person = Person.find(params[:id])
+        @person = People.find(params[:id])
     end
 
     def new
-        @person = Person.new
+        @person = People.new
     end
 
     def create
-        @person = Person.new(person_params)
+        @person = People.new(person_params)
 
         @person.active = true
 
@@ -20,11 +20,11 @@ class Manage::Person::ProfileController < ApplicationController
     end
 
     def edit
-        @person = Person.find(params[:id])
+        @person = People.find(params[:id])
     end
 
     def update
-        @person = Person.find(params[:id])
+        @person = People.find(params[:id])
 
         if @person.update(person_params)
             redirect_to manage_person_profile_path(@person.id)
