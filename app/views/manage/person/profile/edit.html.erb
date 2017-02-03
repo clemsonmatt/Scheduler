@@ -1,0 +1,53 @@
+<% content_for :sub_nav do %>
+    <%= link_to 'People', manage_person_index_path %>
+    / <%= link_to manage_person_profile_path(@person.id) do %><%= @person %><% end %>
+    / Edit
+<% end %>
+
+<% content_for :person_content do %>
+    <%= bootstrap_form_for @person, url: {action: 'update'} do |f| %>
+        <h4>Personal</h4>
+        <div class="row">
+            <div class="col-md-4">
+                <%= f.text_field :first_name %>
+                <%= f.text_field :last_name %>
+                <%= f.text_field :email %>
+            </div>
+            <div class="col-md-4">
+                <%= f.text_field :phone %>
+                <%= f.select :gender, ['Male', 'Female'], include_blank: '-- Gender --' %>
+                <%= f.date_field :dob, label: "Date of Birth" %>
+            </div>
+            <div class="col-md-4">
+                <%= f.text_field :address %>
+                <%= f.text_field :city %>
+                <div class="row">
+                    <div class="col-md-6">
+                        <%= f.select :state, ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'], include_blank: '-- State --' %>
+                    </div>
+                    <div class="col-md-6">
+                        <%= f.text_field :zip %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h4>Company</h4>
+        <div class="row">
+            <div class="col-md-4">
+                <%= f.date_field :hire_date %>
+                <%= f.check_box :active, label: 'Current Employee' %>
+            </div>
+            <div class="col-md-4">
+                <%= f.select :shirt_size, ['XS', 'SM', 'MD', 'LG', 'XL', 'XXL', '3XL'], include_blank: '-- Shirt Size --' %>
+            </div>
+            <div class="col-md-4">
+
+            </div>
+        </div>
+        <br>
+        <%= f.submit :class => 'btn btn-primary' %>
+    <% end %>
+<% end %>
+
+<%= render 'manage/person/layout' %>

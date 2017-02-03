@@ -1,0 +1,96 @@
+<% content_for :sub_nav do %>
+    <%= link_to "People", manage_person_index_path %> / <%= @person %>
+<% end %>
+
+<% content_for :person_content do %>
+    <legend>
+        <h3>
+            <%= link_to edit_manage_person_profile_path, class: 'btn-round btn-round-primary btn-round-md pull-right' do %>
+                <%= material_icon.create.md_18 %>
+            <% end %>
+            Profile
+        </h3>
+    </legend>
+    <h4>Personal</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th class="col-md-4">First Name</th>
+                    <td><%= @person.first_name %></td>
+                </tr>
+                <tr>
+                    <th>Last Name</th>
+                    <td><%= @person.last_name %></td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td><%= @person.email %></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th class="col-md-4">Phone</th>
+                    <td><%= @person.phone %></td>
+                </tr>
+                <tr>
+                    <th>Gender</th>
+                    <td><%= @person.gender %></td>
+                </tr>
+                <tr>
+                    <th>Date of Birth</th>
+                    <td>
+                        <% if @person.dob %>
+                            <%= @person.dob.strftime('%m/%d/%Y') %>
+                            <% if ((Date.today.to_time - @person.dob.to_time) / 1.years) < 18 %>
+                                <span class="label label-warning">Minor</span>
+                            <% end %>
+                        <% end %>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <h5>Address</h5>
+            <p>
+                <%= @person.address %>
+                <br>
+                <%= @person.city %>, <%= @person.state %> <%= @person.zip %>
+            </p>
+        </div>
+    </div>
+    <hr>
+    <h4>Company</h4>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th class="col-md-3">Hire Date</th>
+                    <td>
+                        <% if @person.hire_date %>
+                            <%= @person.hire_date.strftime('%m/%d/%Y') %>
+                            <span class="label <% if @person.active %>label-success<% else %>label-warning<% end %>">
+                                <%= @person.active ? 'Active' : 'Archived' %>
+                            </span>
+                        <% end %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Uniform Size</th>
+                    <td>
+                        Shirt &ndash; <%= @person.shirt_size %>
+                        <br>
+                        Pants &ndash; 36x32
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6">
+
+        </div>
+    </div>
+<% end %>
+
+<%= render 'manage/person/layout' %>

@@ -1,0 +1,22 @@
+<% content_for :sub_nav do %>
+    <%= link_to 'People', manage_person_index_path %> / Add
+<% end %>
+
+<%= bootstrap_form_for @person, url: {action: 'create'} do |f| %>
+    <div class="row">
+        <div class="col-md-4">
+            <%= f.text_field :first_name, class: "form-control" %>
+            <%= f.text_field :last_name, class: "form-control" %>
+        </div>
+        <div class="col-md-4">
+            <%= f.text_field :email, class: "form-control" %>
+            <%= f.text_field :phone, class: "form-control" %>
+        </div>
+        <div class="col-md-4">
+            <%= f.password_field :password, class: "form-control" %>
+            <%= f.password_field :password_confirmation, class: "form-control" %>
+        </div>
+    </div>
+    <br>
+    <%= f.submit :class => 'btn btn-primary' %>
+<% end %>

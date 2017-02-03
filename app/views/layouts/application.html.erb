@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scheduler</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Scheduler</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="<%= current_page?(schedule_index_path) ? 'active' : '' %>">
+                        <%= link_to "Schedule", schedule_index_path %>
+                    </li>
+                    <li><a href="#">Requests</a></li>
+                    <li><a href="#">My Profile</a></li>
+                    <li class="dropdown <%= request.fullpath.include?('manage') ? 'active' : '' %>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="<%= request.fullpath.include?('person') ? 'active' : '' %>">
+                                <%= link_to "People", manage_person_index_path %>
+                            </li>
+                            <li><a href="#">Timesheets</a></li>
+                            <li><a href="#">Positions</a></li>
+                            <li><a href="#">Requests</a></li>
+                            <li><a href="#">Roles</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Matt Ellis <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <% if content_for?(:sub_nav) %>
+        <div class="sub-nav">
+            <h4><%= yield :sub_nav %></h4>
+        </div>
+    <% end %>
+
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>" style="border-radius: 0px;">
+            <button type="button" class="close" data-dismiss="alert" style="font-size: 1.8em;">&times;</button>
+            <span style="margin: 0px 20px;"><%= value %></span>
+        </div>
+    <% end %>
+
+    <div class="content">
+        <%= yield %>
+    </div>
+</body>
+</html>
